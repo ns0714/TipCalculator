@@ -36,7 +36,7 @@ class SettingsViewController: UIViewController {
     
     func setDefaultSplitBy(split : Int){
         let defaults = NSUserDefaults.standardUserDefaults()
-         defaults.setInteger(split, forKey: "splitBy")
+        defaults.setInteger(split, forKey: "splitBy")
         defaults.synchronize()
     }
     
@@ -58,7 +58,6 @@ class SettingsViewController: UIViewController {
     
     @IBAction func spiltValueChanged(sender: AnyObject) {
         spiltCountLabel.text =  String(spiltControl.selectedSegmentIndex)
-        print("what is the value" ,spiltControl.selectedSegmentIndex)
         setDefaultSplitBy(spiltControl.selectedSegmentIndex)
     }
 }

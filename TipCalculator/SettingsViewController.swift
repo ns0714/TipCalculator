@@ -18,6 +18,7 @@ class SettingsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setDefaultTip(15)
         setDefaultSplitBy(0)
         // Do any additional setup after loading the view.
@@ -28,15 +29,15 @@ class SettingsViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func setDefaultTip(tip : Int){
-        let defaults = NSUserDefaults.standardUserDefaults()
-        defaults.setInteger(tip, forKey: "tip")
+    func setDefaultTip(_ tip : Int){
+        let defaults = UserDefaults.standard
+        defaults.set(tip, forKey: "tip")
         defaults.synchronize()
     }
     
-    func setDefaultSplitBy(split : Int){
-        let defaults = NSUserDefaults.standardUserDefaults()
-        defaults.setInteger(split, forKey: "splitBy")
+    func setDefaultSplitBy(_ split : Int){
+        let defaults = UserDefaults.standard
+        defaults.set(split, forKey: "splitBy")
         defaults.synchronize()
     }
     
@@ -50,13 +51,13 @@ class SettingsViewController: UIViewController {
     }
     */
 
-    @IBAction func sliderValueChanged(sender: UISlider) {
-        var currentValue = Int(sender.value)
+    @IBAction func sliderValueChanged(_ sender: UISlider) {
+        let currentValue = Int(sender.value)
         tipLabel.text = "\(currentValue)%"
         setDefaultTip(currentValue)
     }
     
-    @IBAction func spiltValueChanged(sender: AnyObject) {
+    @IBAction func spiltValueChanged(_ sender: AnyObject) {
         spiltCountLabel.text =  String(spiltControl.selectedSegmentIndex)
         setDefaultSplitBy(spiltControl.selectedSegmentIndex)
     }

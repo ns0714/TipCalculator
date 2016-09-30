@@ -17,6 +17,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var spiltLabel: UILabel!
     @IBOutlet weak var tipValueLabel: UILabel!
     
+    @IBOutlet weak var fullView: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         print("view did load")
@@ -29,45 +31,45 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         print("view will appear")
         billField.becomeFirstResponder()
         getDefaultValue()
     }
    
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
     }
     
-    override func viewDidDisappear(animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
     }
 
-    @IBAction func onTap(sender: AnyObject) {
+    @IBAction func onTap(_ sender: AnyObject) {
         view.endEditing(true)
     }
     
     func getDefaultValue(){
-        let defaults = NSUserDefaults.standardUserDefaults()
-        let tipPercent = defaults.integerForKey("tip")
-        let splitValue = defaults.integerForKey("splitBy")
+        let defaults = UserDefaults.standard
+        let tipPercent = defaults.integer(forKey: "tip")
+        let splitValue = defaults.integer(forKey: "splitBy")
         tipLabel.text = "Tip(\(tipPercent)%)"
         spiltLabel.text = String(format: "Split (\(Int(splitValue)))")
     }
 
-    @IBAction func calculateTip(sender: AnyObject) {
+    @IBAction func calculateTip(_ sender: AnyObject) {
         calculateTip()
     }
     
     func calculateTip(){
         
         let bill = Double(billField.text!) ?? 0
-        let tipPercent = NSUserDefaults.standardUserDefaults().integerForKey("tip")
+        let tipPercent = UserDefaults.standard.integer(forKey: "tip")
         let tip = (bill * Double(tipPercent))/100
         let total = bill + tip
         
@@ -75,7 +77,7 @@ class ViewController: UIViewController {
         tipValueLabel.text = String(format: "$%0.2f", tip)
         totalLabel.text = String(format: "$%0.2f", total)
         
-        let splitBy = Double(NSUserDefaults.standardUserDefaults().integerForKey("splitBy"))
+        let splitBy = Double(UserDefaults.standard.integer(forKey: "splitBy"))
         if(splitBy != 0){
             let splitAmount = total/splitBy
             spiltLabel.text = String(format: "Split (\(Int(splitBy)))")
